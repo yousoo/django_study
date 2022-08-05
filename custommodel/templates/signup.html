@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+</head>
+<body>
+    <h1>로그인</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <p><input type="text" name="username" placeholder="사용자 아이디"></p>
+        <p><input type="password" name="password1" placeholder="비밀번호"></p>
+        <p><input type="password" name="password2" placeholder="비밀번호 확인"></p>
+        <p><input type="text" name="member_name" placeholder="사용자 실명"></p>
+        <p><input type="text" name="sex" placeholder="성별"></p>
+        <p><input type="text" name="phone_number" placeholder="전화번호"></p>
+        <p><textarea name="introduce" rows="8">자기소개</textarea></p>
+        <p><input type="submit" value="회원가입"></p>
+    </form>
+</body>
+</html>
+
+
+
