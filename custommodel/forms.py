@@ -6,3 +6,8 @@ class MembersForm(UserCreationForm):
     class Meta:
         model = Members
         fields = ['username', 'password1', 'password2', 'member_name', 'sex', 'phone_number', 'introduce']
+
+# class SignInForm(UserCreationForm):
+#     class Meta:
+#         model = Members
+#         fields = ['username', 'password1']
