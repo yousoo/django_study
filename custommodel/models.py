@@ -8,4 +8,4 @@ class Members(AbstractUser):
     introduce = models.TextField()
 
     def __str__(self):
-        return f'{self.username}({self.member_name})'
+        return self.username

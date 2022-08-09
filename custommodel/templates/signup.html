@@ -1,25 +1,63 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="kr">
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
 </head>
 <body>
-    <h1>로그인</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        <p><input type="text" name="username" placeholder="사용자 아이디"></p>
-        <p><input type="password" name="password1" placeholder="비밀번호"></p>
-        <p><input type="password" name="password2" placeholder="비밀번호 확인"></p>
-        <p><input type="text" name="member_name" placeholder="사용자 실명"></p>
-        <p><input type="text" name="sex" placeholder="성별"></p>
-        <p><input type="text" name="phone_number" placeholder="전화번호"></p>
-        <p><textarea name="introduce" rows="8">자기소개</textarea></p>
-        <p><input type="submit" value="회원가입"></p>
-    </form>
-    <h2><a href="{% url 'login' %}">로그인</a></h2>
+    <div class="registration-form">
+        <h1>회원가입</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <p>사용자 아이디 :</p>
+            <input type="text" name="username" id="username" placeholder="사용자 아이디" required>
+            <a href="javascript:check()">아이디체크</a>
+            <p>비밀번호 :</p>
+            <input type="password" name="password1" placeholder="비밀번호" required>
+            <p>비밀번호 확인 :</p>
+            <input type="password" name="password2" placeholder="비밀번호 확인" required>
+            <p>사용자 실명 :</p>
+            <input type="text" name="member_name" placeholder="사용자 실명" required>
+            <p>성별 :</p>
+            <input type="text" name="sex" placeholder="성별" required>
+            <p>전화번호 :</p>
+            <input type="text" name="phone_number" placeholder="전화번호" required>
+            <p>자기소개 :</p>
+            <textarea name="introduce" rows="8" required>자기소개</textarea>
+            <button type="submit">회원가입</button>
+        </form>
+        <div class="error-message">
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="caption">
+            <a href="{% url 'signin' %}">회원가입 했으면 여기에서 로그인</a>
+        </div>
+    </div>
+    <script>
+        function check(){
+            input_username = document.getElementById('username').value;
+            url = 'username_check?username=' + input_username;
+            //location.href = url;
+            fetch(url)
+            .then(res => res.json())
+            .then(res => {
+                console.log(res.is_user)
+                if (res.is_user === 'yes'){
+                    alert('이미 사용자가 있어요.')
+                    document.getElementById('username').focus()
+                } else {
+                    alert('이 아이디로 등록가능합니다.')
+                }
+            })
+        }
+    </script>
 </body>
 </html>
-
-
-
