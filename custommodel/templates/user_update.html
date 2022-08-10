@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <title>회원정보수정</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <div class="registration-form">
+        <h1>{{ request.user }}님 회원정보수정</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+{#            <p>사용자 아이디 :</p>#}
+{#            <input type="text" name="username" id="username" value="{{ user_detail.username }}">#}
+            <p>비밀번호 :</p>
+            <input type="password" name="password1" required>
+            <p>비밀번호 확인 :</p>
+            <input type="password" name="password2" required>
+            <p>사용자 실명 :</p>
+            <input type="text" name="member_name" value="{{ user_detail.member_name }}" required>
+            <p>성별 :</p>
+            <input type="text" name="sex" value="{{ user_detail.sex }}" required>
+            <p>전화번호 :</p>
+            <input type="text" name="phone_number" value="{{ user_detail.phone_number }}" required>
+            <p>자기소개 :</p>
+            <textarea name="introduce" rows="8" required>{{ user_detail.introduce }}</textarea>
+            <button type="submit">정보수정</button>
+        </form>
+        <div class="error-message">
+            {% if form.errors %}
+                {% for field in form %}
+                    {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <script>
+</body>
+</html>
