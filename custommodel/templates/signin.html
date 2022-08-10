@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+</head>
+<body>
+    <section class="login-form">
+        <h1>로그인</h1>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="int-area">
+                <input type="text" name="username" id="id" autocomplete="off" required>
+                <label for="username">사용자 아이디</label>
+            </div>
+            <div class="int-area">
+                <input type="password" name="password" id="pw" autocomplete="off" required>
+                <label for="password">비밀번호</label>
+            </div>
+            <div class="btn-area">
+                <button type="submit">로그인</button>
+            </div>
+        </form>
+        <div class="caption">
+            <a href="{% url 'signup' %}">회원가입을 아직 안하셨어요?</a>
+        </div>
+
+        {% for message in messages %}
+            <div class="info-message">
+                <span class="message-content">{{ message }}</span>
+            </div>
+        {% endfor %}
+
+
+    </section>
+</body>
+</html>
